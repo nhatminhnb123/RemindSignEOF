@@ -1,0 +1,37 @@
+C:\Users\Minh\documents\visual studio 2015\Projects\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe.config
+C:\Users\Minh\documents\visual studio 2015\Projects\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe.manifest
+C:\Users\Minh\documents\visual studio 2015\Projects\WindowsService1\WindowsService1\bin\Debug\WindowsService1.application
+C:\Users\Minh\documents\visual studio 2015\Projects\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe
+C:\Users\Minh\documents\visual studio 2015\Projects\WindowsService1\WindowsService1\bin\Debug\WindowsService1.pdb
+C:\Users\Minh\documents\visual studio 2015\Projects\WindowsService1\WindowsService1\bin\Debug\DB.Framework.dll
+C:\Users\Minh\documents\visual studio 2015\Projects\WindowsService1\WindowsService1\obj\Debug\WindowsService1.csprojResolveAssemblyReference.cache
+C:\Users\Minh\documents\visual studio 2015\Projects\WindowsService1\WindowsService1\obj\Debug\WindowsService1.exe.manifest
+C:\Users\Minh\documents\visual studio 2015\Projects\WindowsService1\WindowsService1\obj\Debug\WindowsService1.application
+C:\Users\Minh\documents\visual studio 2015\Projects\WindowsService1\WindowsService1\obj\Debug\WindowsService1.exe
+C:\Users\Minh\documents\visual studio 2015\Projects\WindowsService1\WindowsService1\obj\Debug\WindowsService1.pdb
+D:\SCTV\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe.config
+D:\SCTV\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe.manifest
+D:\SCTV\WindowsService1\WindowsService1\bin\Debug\WindowsService1.application
+D:\SCTV\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe
+D:\SCTV\WindowsService1\WindowsService1\bin\Debug\WindowsService1.pdb
+D:\SCTV\WindowsService1\WindowsService1\bin\Debug\DB.Framework.dll
+D:\SCTV\WindowsService1\WindowsService1\obj\Debug\WindowsService1.csproj.AssemblyReference.cache
+D:\SCTV\WindowsService1\WindowsService1\obj\Debug\WindowsService1.csproj.CoreCompileInputs.cache
+D:\SCTV\WindowsService1\WindowsService1\obj\Debug\WindowsService1.exe.manifest
+D:\SCTV\WindowsService1\WindowsService1\obj\Debug\WindowsService1.application
+D:\SCTV\WindowsService1\WindowsService1\obj\Debug\WindowsS.24B08AB2.Up2Date
+D:\SCTV\WindowsService1\WindowsService1\obj\Debug\WindowsService1.exe
+D:\SCTV\WindowsService1\WindowsService1\obj\Debug\WindowsService1.pdb
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\WindowsService1.exe.config
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\WindowsService1.exe.manifest
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\WindowsService1.application
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\WindowsService1.exe
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\WindowsService1.pdb
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\DB.Framework.dll
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\WindowsService1.csproj.AssemblyReference.cache
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\WindowsService1.csproj.CoreCompileInputs.cache
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\WindowsService1.exe.manifest
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\WindowsService1.application
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\WindowsS.24B08AB2.Up2Date
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\WindowsService1.exe
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\WindowsService1.pdb

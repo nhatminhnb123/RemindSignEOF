@@ -1,0 +1,13 @@
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\WindowsService1.exe.config
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\WindowsService1.exe.manifest
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\WindowsService1.application
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\WindowsService1.exe
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\DB.Framework.dll
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\RemindEOF.csproj.AssemblyReference.cache
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\RemindEOF.csproj.CoreCompileInputs.cache
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\WindowsService1.exe.manifest
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\WindowsService1.application
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\RemindEOF.csproj.Up2Date
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\WindowsService1.exe
+D:\SCTV\ChucNangNhacKy\WindowsService1\obj\Debug\WindowsService1.pdb
+D:\SCTV\ChucNangNhacKy\WindowsService1\bin\Debug\WindowsService1.pdb
