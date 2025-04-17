@@ -8,8 +8,8 @@ namespace WindowsService1
 {
     public partial class Service1 : ServiceBase
     {
-        private static Timer timer;
-        private static GetData dto;
+        private Timer timer;
+        private GetData dto;
         public Service1()
         {
             InitializeComponent();
@@ -17,63 +17,119 @@ namespace WindowsService1
 
         protected override void OnStart(string[] args)
         {
-            dto = new GetData();
-            timer = new Timer(60000);
-            timer.Elapsed += OnTimedEvent;
-            timer.Start();
+            try
+            {
+                Log("Service starting...");
+
+                dto = new GetData();
+                timer = new Timer(60000); // 60 giây
+                timer.Elapsed += OnTimedEvent;
+                timer.AutoReset = true;
+                timer.Enabled = true;
+
+                Log("Service started.");
+            }
+            catch (Exception ex)
+            {
+                Log("Error in OnStart: " + ex);
+                throw;
+            }
         }
 
         protected override void OnStop()
         {
-            timer.Stop();
-            timer.Dispose();
-
-            dto = null;
-        }
-
-        private static void OnTimedEvent(object sender, ElapsedEventArgs e)
-        {
-            var ListRemindEmail = dto.GetAllRemindEmail<RawReminder>();
-            foreach (var rs in ListRemindEmail)
+            try
             {
-                if (ShouldSendEmail(rs.RemindTimer, rs.NumberOfTimesSent, rs.DocumentsSignTypeId))
-                {
-                    var dataPrepare = dto.PrePareData<RawData>(rs.DocumentsSignTypeId)[0];
-                    var listUserOnDuty = dto.GetListUserSignNextAction<RawEmail>(dataPrepare.DocId);
-                    if (listUserOnDuty != null && listUserOnDuty.Count > 0)
-                    {
-                        foreach (var userOnDurty in listUserOnDuty)
-                        {
-                            if (userOnDurty.IsNextStepEmail == 1 && !string.IsNullOrEmpty(userOnDurty.Email) && userOnDurty != null)
-                            {
-                                if (dto.InsertToEmailQueues(
-                                    dataPrepare.DocId,
-                                    userOnDurty.Email,
-                                    CreateEmailSubject(dataPrepare.DocSetCode, dataPrepare.Title),
-                                    CreateEmailBody(userOnDurty.FullName, dataPrepare.DocSetCode, dataPrepare.Title, dataPrepare.DepartName, dataPrepare.CreateDate)))
-                                {
-                                    dto.UpdateTimesRemind(rs.RemindEmailId);
-                                }
-                            }
-                        }
-
-                    }
-                }
+                Log("Service stopping...");
+                timer?.Stop();
+                timer?.Dispose();
+                Log("Service stopped.");
+            }
+            catch (Exception ex)
+            {
+                Log("Error in OnStop: " + ex);
             }
         }
 
-        private static bool ShouldSendEmail(DateTime? dateTime, Int64 numberOfTimesSent, Int64 docSignTypeId)
+        private void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
+            try
+            {
+                timer.Enabled = false; // Ngăn overlap
+                Log("Timer triggered.");
 
+                if (dto == null)
+                {
+                    Log("dto is null. Skipping OnTimedEvent.");
+                    return;
+                }
+
+                var reminders = dto.GetAllRemindEmail<RawReminder>();
+
+                if (reminders == null || reminders.Count == 0)
+                {
+                    Log("No reminders found — skip.");
+                    return;
+                }
+
+                foreach (var rs in reminders)
+                {
+                    if (!ShouldSendEmail(rs.RemindTimer, rs.NumberOfTimesSent, rs.DocumentsSignTypeId))
+                        continue;
+
+                    var prepared = dto.PrePareData<RawData>(rs.DocumentsSignTypeId);
+                    if (prepared == null || prepared.Count == 0)
+                        continue;
+
+                    var data = prepared[0];
+                    var users = dto.GetListUserSignNextAction<RawEmail>(data.DocId);
+
+                    if (users == null || users.Count == 0)
+                        continue;
+
+                    foreach (var user in users)
+                    {
+                        if (user == null || user.IsNextStepEmail != 1 || string.IsNullOrEmpty(user.Email))
+                            continue;
+
+                        bool isSent = dto.InsertToEmailQueues(
+                            data.DocId,
+                            user.Email,
+                            CreateEmailSubject(data.DocSetCode, data.Title),
+                            CreateEmailBody(user.FullName, data.DocSetCode, data.Title, data.DepartName, data.CreateDate));
+
+                        if (isSent)
+                        {
+                            dto.UpdateTimesRemind(rs.RemindEmailId);
+                            Log($"Email sent to: {user.Email}");
+                        }
+                    }
+                }
+
+                Log("Timer execution complete.");
+            }
+            catch (Exception ex)
+            {
+                Log("Error in OnTimedEvent: " + ex);
+            }
+            finally
+            {
+                timer.Enabled = true;
+            }
+        }
+
+        // NẾU CHƯA KÝ THÌ RETURN: TRUE
+        private bool ShouldSendEmail(DateTime? dateTime, long numberOfTimesSent, long docSignTypeId)
+        {
             DateTime now = DateTime.Now;
-            DateTime rawNow = now.AddMinutes(-1); // 1 phút trước
-            if (dateTime >= rawNow && numberOfTimesSent == 0)
+            DateTime threshold = now.AddMinutes(-1);
+
+            if (dateTime.HasValue && dateTime.Value >= threshold && numberOfTimesSent == 0)
             {
                 return dto.CheckNotSignAndUpdateStatusId(docSignTypeId);
             }
             return false;
         }
-
         private static string CreateEmailSubject(string docSetCode, string docTitle)
         {
             return $@"Nhắc Ký: Bộ hồ sơ [" + docSetCode + "] - " + docTitle;
@@ -151,14 +207,16 @@ namespace WindowsService1
 </html>
 ";
         }
-        //private static void WriteLog(string message)
-        //{
-        //    string logFilePath = "C:\\Users\\Minh\\Desktop\\MyServiceLog.txt";
-        //    using (var writer = new System.IO.StreamWriter(logFilePath, true))
-        //    {
-        //        writer.WriteLine(message);
-        //    }
-        //}
+        private void Log(string message)
+        {
+            string path = @"C:\RemindEmailEOF\Service_log.txt";
+            try
+            {
+                System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
+                System.IO.File.AppendAllText(path, $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {message}{Environment.NewLine}");
+            }
+            catch { /* Không được ghi log cũng không crash */ }
+        }
 
     }
 }

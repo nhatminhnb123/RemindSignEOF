@@ -10,6 +10,7 @@ namespace WindowsService1.DBConnection
 {
     public class GetData : Base
     {
+        // đã dc khí thì return: false, chưa thì true
         public bool CheckNotSignAndUpdateStatusId(Int64 DocSignTypeId)
         {
             try
